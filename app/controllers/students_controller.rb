@@ -1,5 +1,4 @@
-class Students < ApplicationController
-
+class StudentsController < ApplicationController
 
     def new
         @student = Student.new
@@ -14,13 +13,13 @@ class Students < ApplicationController
     end 
 
     def edit
-        @student = Studentl.find_by(id: params[:id])
+        @student = Student.find_by(id: params[:id])
     end 
 
     def update
         @student = Student.find_by(id: params[:id])
         @student.update(params.require(:student))
-        redirect_to student_path(@student)
+        redirect_to new_student_path(@student)
     end 
 
 end 
