@@ -5,7 +5,8 @@ class StudentsController < ApplicationController
     end 
 
     def create
-        @student = Student.create(params.require(:student))
+        @student = Student.create(student_params)
+        redirect_to student_path(@student)
     end 
 
     def show
@@ -18,8 +19,15 @@ class StudentsController < ApplicationController
 
     def update
         @student = Student.find_by(id: params[:id])
-        @student.update(params.require(:student))
-        redirect_to new_student_path(@student)
-    end 
+        @student.update(student_params)
+        redirect_to student_path(@student)
+    end
+
+
+    private
+
+	def student_params
+		params.require(:student).permit(:first_name, :last_name)
+	end
 
 end 
